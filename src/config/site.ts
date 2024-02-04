@@ -1,4 +1,4 @@
-import { SiteConfig } from "@/types"
+import { Location, SiteConfig } from "@/types"
 
 import { env } from "@/env.mjs"
 
@@ -16,4 +16,12 @@ export const siteConfig: SiteConfig = {
     github: "https://github.com/THEALIFHAKER1/METEO",
   },
   ogImage: `${env.NEXT_PUBLIC_APP_URL}/og.jpg`,
+}
+
+export const DEFAULT_LOCATION: Location = {
+  city: "Kuala Lumpur",
+  coord: {
+    lat: "3.1499",
+    lon: "101.6945",
+  },
 }
