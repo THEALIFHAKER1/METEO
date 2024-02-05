@@ -15,9 +15,33 @@ import GetWeatherForecast from "@/lib/api/GetWeatherForecast"
 import WeatherWidgets from "@/components/widgets/WeatherWidgets"
 import WidgetCurrentWeather from "@/components/widgets/WidgetCurrentWeather"
 
-export const metadata: Metadata = {
-  title: `Weather Forecast`,
-  description: ` weather forecast with current conditions, wind, air quality, and what to expect for the next 3 days.`,
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: searchParams
+}): Promise<Metadata> {
+  const { lat, lon } = searchParams
+
+  if (!lat || !lon) {
+    return {
+      title: `${DEFAULT_LOCATION.city} - Weather Forecast`,
+      description: `${DEFAULT_LOCATION.city} weather forecast with current conditions, wind, air quality, and what to expect for the next 3 days.`,
+    }
+  }
+  const CurrentWeatherData: OpenWeatherData = await GetCurrentWeather({
+    lat,
+    lon,
+  })
+
+  const coord = `${CurrentWeatherData.coord.lat}, ${CurrentWeatherData.coord.lon}`
+  const placesname = CurrentWeatherData.sys.country
+    ? `${CurrentWeatherData.name}, ${CurrentWeatherData.sys.country}`
+    : CurrentWeatherData.name
+  console.log(CurrentWeatherData.sys.country)
+  return {
+    title: `${placesname || coord} - Weather Forecast`,
+    description: `${placesname || coord}  weather forecast with current conditions, wind, air quality, and what to expect for the next 3 days.`,
+  }
 }
 
 interface searchParams {

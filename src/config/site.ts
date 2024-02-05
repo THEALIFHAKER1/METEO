@@ -19,7 +19,7 @@ export const siteConfig: SiteConfig = {
 }
 
 export const DEFAULT_LOCATION: Location = {
-  city: "Kuala Lumpur",
+  city: "Kuala Lumpur, MY",
   coord: {
     lat: "3.1499",
     lon: "101.6945",
