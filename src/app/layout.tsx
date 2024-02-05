@@ -6,6 +6,7 @@ import Script from "next/script"
 import { Toaster } from "sonner"
 
 import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -69,7 +70,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <head />
       <body
-        className={`${inter.className}, flex-col  px-[1rem] antialiased selection:bg-black selection:text-white dark:bg-black dark:selection:bg-white dark:selection:text-black md:px-[2rem] `}
+        className={cn(
+          "min-h-screen bg-background antialiased dark:bg-black",
+          inter.className
+        )}
       >
         <ThemeProvider
           attribute="class"
@@ -78,7 +82,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           disableTransitionOnChange
         >
           <Toaster />
-          <main className="h-screen flex-grow ">{children}</main>
+          {children}
         </ThemeProvider>
         <Script
           strategy={"beforeInteractive"}
