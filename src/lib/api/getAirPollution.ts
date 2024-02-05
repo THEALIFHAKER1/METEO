@@ -1,8 +1,8 @@
-import { Coordinates, OpenWeatherData } from "@/types"
+import { Coordinates } from "@/types"
 
 import { env } from "@/env.mjs"
 
-export default async function getAirPollution({ lat, lon }: Coordinates) {
+export default async function GetAirPollution({ lat, lon }: Coordinates) {
   if (!env.OPEN_WEATHER_API_KEY) {
     throw new Error("Open Weather API Key is not set")
   }

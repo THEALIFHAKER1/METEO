@@ -1,5 +1,5 @@
 import React from "react"
-import { AirQualityData } from "@/types"
+import { AirPollutionData } from "@/types"
 import { ClassNameValue } from "tailwind-merge"
 
 import { cn } from "@/lib/utils"
@@ -14,7 +14,7 @@ import {
 import { Progress } from "../ui/progress"
 
 interface AirPollutionProps {
-  airQuality: AirQualityData
+  airQuality: AirPollutionData["list"][0]
   className?: ClassNameValue
 }
 

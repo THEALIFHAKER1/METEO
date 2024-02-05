@@ -1,5 +1,3 @@
-// import { City, HourlyForecastData } from "@/types"
-
 import { OpenWeatherData } from "@/types"
 
 import { convertToDate } from "@/lib/dateUtils"
@@ -12,7 +10,7 @@ interface CurrentWeatherProps {
   data: OpenWeatherData
 }
 
-export default function CurrentWeather({ data }: CurrentWeatherProps) {
+export default function CurrentWeatherWidget({ data }: CurrentWeatherProps) {
   const initial = new Date()
   return (
     <Card className="relative flex h-fit w-full shrink-0 flex-col justify-between overflow-hidden p-10 ">
@@ -23,9 +21,24 @@ export default function CurrentWeather({ data }: CurrentWeatherProps) {
           <Clock initial={initial} timezone={data.timezone} />
         </div>
         <div className="text-md mt-2 flex font-bold">
-          <span>{data.name}</span>
-          {data.sys.country && <span className="mx-1">,</span>}
-          <span>{data.sys.country}</span>
+          {data.name ? (
+            <>
+              <span>{data.name}</span>
+
+              {data.sys.country && (
+                <>
+                  <span>,&nbsp;</span>
+                  <span>{data.sys.country}</span>
+                </>
+              )}
+            </>
+          ) : (
+            <>
+              <span>{data.coord.lat}</span>
+              <span>,&nbsp;</span>
+              <span>{data.coord.lon}</span>
+            </>
+          )}
         </div>
       </div>
       <div className="flex justify-center py-7 text-8xl font-bold md:py-10">

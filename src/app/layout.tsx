@@ -68,7 +68,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <head />
       <body
-        className={`${inter.className}, flex-col  overflow-hidden px-[1rem] antialiased selection:bg-black selection:text-white dark:bg-black dark:selection:bg-white dark:selection:text-black md:p-[2rem] `}
+        className={`${inter.className}, flex-col  px-[1rem] antialiased selection:bg-black selection:text-white dark:bg-black dark:selection:bg-white dark:selection:text-black md:px-[2rem] `}
       >
         <ThemeProvider
           attribute="class"
