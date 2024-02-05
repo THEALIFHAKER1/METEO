@@ -10,13 +10,12 @@ import IconComponent from "../ui/icon-component"
 
 interface CurrentWeatherProps {
   data: OpenWeatherData
-  // city: City
 }
 
 export default function CurrentWeather({ data }: CurrentWeatherProps) {
   const initial = new Date()
   return (
-    <Card className="relative flex h-fit w-full shrink-0 flex-col justify-between overflow-hidden p-10 md:h-[25rem] md:w-[25rem]">
+    <Card className="relative flex h-fit w-full shrink-0 flex-col justify-between overflow-hidden p-10 ">
       <div className="absolute " />
       <div>
         <div className="flex justify-between text-lg font-semibold">
@@ -25,7 +24,7 @@ export default function CurrentWeather({ data }: CurrentWeatherProps) {
         </div>
         <div className="text-md mt-2 flex font-bold">
           <span>{data.name}</span>
-          <span className="mx-1">,</span>
+          {data.sys.country && <span className="mx-1">,</span>}
           <span>{data.sys.country}</span>
         </div>
       </div>
