@@ -3,7 +3,9 @@ import { Metadata } from "next"
 import { OpenWeatherData } from "@/types"
 
 import { DEFAULT_LOCATION } from "@/config/site"
-import GetWeatherOfLocation from "@/lib/api/GetWeatherOfLocation"
+import GetCurrentWeather from "@/lib/api/GetCurrentWeather"
+import GetWeatherOfLocation from "@/lib/api/GetWeatherForecast"
+import GetWeatherForecast from "@/lib/api/GetWeatherForecast"
 import CurrentWeather from "@/components/widget/CurrentWeather"
 
 interface searchParams {
@@ -22,19 +24,24 @@ export default async function MainPage({
 }) {
   const lat = searchParams?.lat || DEFAULT_LOCATION.coord.lat
   const lon = searchParams?.lon || DEFAULT_LOCATION.coord.lon
-  const WeatherOfLocation: OpenWeatherData = await GetWeatherOfLocation({
+  const CurrentWeatherData: OpenWeatherData = await GetCurrentWeather({
     lat,
     lon,
   })
+  const WeatherForecastData: OpenWeatherData = await GetWeatherForecast({
+    lat,
+    lon,
+  })
+
   return (
     <>
       <div className="flex flex-col gap-4 md:flex-row">
         <div className="flex w-full min-w-[18rem] flex-col gap-4 md:w-1/2">
           <CurrentWeather
-            data={WeatherOfLocation}
-            city={WeatherOfLocation.name}
+            data={CurrentWeatherData}
+            // city={CurrentWeatherData.name}
           />
-          {JSON.stringify(WeatherOfLocation)}
+          {JSON.stringify(CurrentWeatherData)}
         </div>
         <section className="grid h-full grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
           {/*  */}

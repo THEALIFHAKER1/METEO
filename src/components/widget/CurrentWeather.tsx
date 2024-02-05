@@ -1,18 +1,19 @@
+// import { City, HourlyForecastData } from "@/types"
+
+import { OpenWeatherData } from "@/types"
+
 import { convertToDate } from "@/lib/dateUtils"
 import { Card } from "@/components/ui/card"
 
-// import { City, HourlyForecastData } from "@/types"
 import Clock from "../ui/clock"
 import IconComponent from "../ui/icon-component"
 
 interface CurrentWeatherProps {
-  // data: HourlyForecastData
-  data: any
+  data: OpenWeatherData
   // city: City
-  city: any
 }
 
-export default function CurrentWeather({ data, city }: CurrentWeatherProps) {
+export default function CurrentWeather({ data }: CurrentWeatherProps) {
   const initial = new Date()
 
   return (
@@ -20,17 +21,11 @@ export default function CurrentWeather({ data, city }: CurrentWeatherProps) {
       <div className="absolute " />
       <div>
         <div className="flex justify-between text-lg font-semibold">
-          <span>
-            {
-              (city = false
-                ? convertToDate(city.timezone, data.dt, "long")
-                : "none")
-            }
-          </span>
-          <Clock initial={initial} timezone={city.timezone} />
+          <span>{convertToDate(data.timezone, data.dt, "long")}</span>
+          <Clock initial={initial} timezone={data.timezone} />
         </div>
         <div className="text-md mt-2 flex font-bold">
-          <span>{city.name}</span>
+          <span>{data.name}</span>
           <i>
             <svg
               viewBox="0 0 24 24"
@@ -59,7 +54,7 @@ export default function CurrentWeather({ data, city }: CurrentWeatherProps) {
       <div>
         <IconComponent
           weatherCode={data.weather[0].id}
-          x={data.sys.pod}
+          // x={data.sys}
           className="h-9 w-9"
         />
         <div className="font-semibold">{data.weather[0].main}</div>
