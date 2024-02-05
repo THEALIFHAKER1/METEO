@@ -4,6 +4,7 @@ import { OpenWeatherData } from "@/types"
 
 import { DEFAULT_LOCATION } from "@/config/site"
 import GetWeatherOfLocation from "@/lib/api/GetWeatherOfLocation"
+import CurrentWeather from "@/components/widget/CurrentWeather"
 
 interface searchParams {
   [key: string]: string
@@ -29,7 +30,10 @@ export default async function MainPage({
     <>
       <div className="flex flex-col gap-4 md:flex-row">
         <div className="flex w-full min-w-[18rem] flex-col gap-4 md:w-1/2">
-          {/*  */}
+          <CurrentWeather
+            data={WeatherOfLocation}
+            city={WeatherOfLocation.name}
+          />
           {JSON.stringify(WeatherOfLocation)}
         </div>
         <section className="grid h-full grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">

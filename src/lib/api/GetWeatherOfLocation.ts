@@ -8,10 +8,7 @@ export default async function GetWeatherOfLocation({
 }: Coordinates): Promise<OpenWeatherData> {
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${env.OPEN_WEATHER_API_KEY}`
   const response = await fetch(apiUrl, {
-    next: {
-      tags: ["WeatherOfLocation"],
-      revalidate: 60 * 60 * 24,
-    },
+    cache: "no-cache",
   })
 
   if (!response.ok) {
