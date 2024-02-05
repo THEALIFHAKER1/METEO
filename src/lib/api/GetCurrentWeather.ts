@@ -16,8 +16,5 @@ export default async function GetCurrentWeather({ lat, lon }: Coordinates) {
     cache: "no-cache",
   })
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch weather data")
-  }
   return response.json()
 }

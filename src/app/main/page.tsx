@@ -79,8 +79,6 @@ export default async function MainPage({
     UvIndexData.daily.uv_index_max[0],
   ])
 
-  console.log(WeatherForecastData)
-
   return (
     <>
       <div className="flex flex-col gap-2 md:flex-row">

@@ -2,9 +2,10 @@ import "@/styles/globals.css"
 
 import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
+import Script from "next/script"
+import { Toaster } from "sonner"
 
 import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -76,8 +77,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
+          <Toaster />
           <main className="h-screen flex-grow ">{children}</main>
         </ThemeProvider>
+        <Script
+          strategy={"beforeInteractive"}
+          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places&callback=Function.prototype`}
+        />
       </body>
     </html>
   )
