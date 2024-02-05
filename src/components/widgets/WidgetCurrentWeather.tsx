@@ -10,7 +10,7 @@ interface CurrentWeatherProps {
   data: OpenWeatherData
 }
 
-export default function CurrentWeatherWidget({ data }: CurrentWeatherProps) {
+export default function WidgetCurrentWeather({ data }: CurrentWeatherProps) {
   const initial = new Date()
   return (
     <Card className="relative flex h-fit w-full shrink-0 flex-col justify-between overflow-hidden p-10 ">
@@ -34,9 +34,9 @@ export default function CurrentWeatherWidget({ data }: CurrentWeatherProps) {
             </>
           ) : (
             <>
-              <span>{data.coord.lat}</span>
+              <span>Lat: {data.coord.lat}</span>
               <span>,&nbsp;</span>
-              <span>{data.coord.lon}</span>
+              <span>Long: {data.coord.lon}</span>
             </>
           )}
         </div>

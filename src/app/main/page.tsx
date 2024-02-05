@@ -12,8 +12,8 @@ import GetAirPollution from "@/lib/api/GetAirPollution"
 import GetCurrentWeather from "@/lib/api/GetCurrentWeather"
 import GetUVData from "@/lib/api/GetUVData"
 import GetWeatherForecast from "@/lib/api/GetWeatherForecast"
-import CurrentWeatherWidget from "@/components/widgets/CurrentWeatherWidget"
 import WeatherWidgets from "@/components/widgets/WeatherWidgets"
+import WidgetCurrentWeather from "@/components/widgets/WidgetCurrentWeather"
 
 export const metadata: Metadata = {
   title: `Weather Forecast`,
@@ -61,7 +61,7 @@ export default async function MainPage({
     <>
       <div className="flex flex-col gap-2 md:flex-row">
         <div className="flex w-full min-w-[18rem] flex-col gap-4 md:w-1/2">
-          <CurrentWeatherWidget data={CurrentWeather} />
+          <WidgetCurrentWeather data={CurrentWeather} />
         </div>
         <section className="grid h-full grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-4">
           <WeatherWidgets
