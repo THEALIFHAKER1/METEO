@@ -1,4 +1,7 @@
-import { ForecastData, WeatherForecastData } from "@/types"
+"use client"
+
+// import { NewForecastData } from "@/types"
+import { WeatherForecastData } from "@/types"
 
 import { convertToDate } from "@/lib/dateUtils"
 
@@ -7,32 +10,53 @@ import IconComponent from "../ui/icon-component"
 import { Separator } from "../ui/separator"
 import { TemperatureRange } from "../ui/temperature-range"
 
+export type NewForecastData = {
+  latitude: number
+  longitude: number
+  generationtime_ms: number
+  utc_offset_seconds: number
+  timezone: string
+  timezone_abbreviation: string
+  elevation: number
+  daily_units: {
+    time: string
+    weather_code: string
+    temperature_2m_max: string
+    temperature_2m_min: string
+  }
+  daily: {
+    time: number[]
+    weather_code: number[]
+    temperature_2m_max: number[]
+    temperature_2m_min: number[]
+  }
+}
+
 interface WidgetForecastProps {
-  data: WeatherForecastData
+  data: NewForecastData
+  timezone: Number
 }
 
 export default function WidgetForecast({ data }: WidgetForecastProps) {
-  const filterWeather = data.list.reduce(
-    (uniqueForecasts: ForecastData[], forecast: ForecastData) => {
-      const date = convertToDate(data.city.timezone, forecast.dt, "short")
-      const isDuplicate = uniqueForecasts.some(
-        (uniqueForecast) =>
-          convertToDate(data.city.timezone, uniqueForecast.dt, "short") === date
-      )
-      if (!isDuplicate) {
-        uniqueForecasts.push(forecast)
-      }
-      return uniqueForecasts
-    },
-    []
-  )
-  const temperatures = filterWeather.map((item: ForecastData) => item.main)
-  const minTemperature = Math.min(...temperatures.map((temp) => temp.temp_min))
-  const maxTemperature = Math.max(...temperatures.map((temp) => temp.temp_max))
+  const forecast = data.daily.time.map((timezone, index) => {
+    return {
+      date: data.daily.time[index],
+      timezone: timezone,
+      weatherCode: data.daily.weather_code[index],
+      temperature: {
+        max: data.daily.temperature_2m_max[index],
+        min: data.daily.temperature_2m_min[index],
+      },
+    }
+  })
+
+  const temperatures = forecast.map((day) => day.temperature)
+  const minTemperature = Math.min(...temperatures.map((temp) => temp.min))
+  const maxTemperature = Math.max(...temperatures.map((temp) => temp.max))
 
   return (
     <>
-      <Card className=" h-[25rem]  shrink-0 overflow-hidden">
+      <Card className=" h-[25rem]  shrink-0 overflow-auto">
         <CardHeader>
           <CardTitle className="flex items-center gap-4 text-sm">
             <i>
@@ -118,47 +142,45 @@ export default function WidgetForecast({ data }: WidgetForecastProps) {
                 />
               </svg>
             </i>
-            Forecast for the next 5 days
+            Forecast for the next 7 days
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 text-base font-normal md:mb-1">
-          {filterWeather.map((item: ForecastData, i) => (
-            <div key={item.dt}>
-              <div className="flex w-full flex-row items-center justify-between gap-2 last:mb-0">
-                <p className="min-w-[3rem] font-medium">
-                  {i === 0
-                    ? "Today"
-                    : convertToDate(data.city.timezone, item.dt, "short")}
-                </p>
-                <IconComponent
-                  weatherCode={item.weather[0].id}
-                  className=" h-8 w-8"
-                />
-                <div className="flex w-[60%] flex-row gap-2 overflow-hidden">
-                  <div className="flex w-full select-none flex-row items-center justify-between gap-2 pr-2 text-sm">
-                    <p className="flex w-[3rem] min-w-fit justify-end text-neutral-600 dark:text-neutral-400">
-                      {Math.floor(item.main.temp_min)}&deg;
-                    </p>
-                    <TemperatureRange
-                      min={minTemperature - Math.floor(Math.random() * 5)}
-                      max={maxTemperature}
-                      value={[
-                        item.main.temp_min - Math.floor(Math.random() * 5),
-                        item.main.temp_max,
-                      ]}
-                    />
-                    <p className="flex w-[3rem] min-w-fit justify-end">
-                      {Math.floor(
-                        item.main.temp_max + Math.floor(Math.random() * 5)
-                      )}
-                      &deg;
-                    </p>
+          {forecast.map((day, i) => {
+            return (
+              <div key={i}>
+                <div className="flex w-full flex-row items-center justify-between gap-2 last:mb-0">
+                  <p className="min-w-[3rem] font-medium">
+                    {i === 0
+                      ? "Today"
+                      : convertToDate(day.timezone, day.date, "short")}
+                  </p>
+                  <IconComponent
+                    weatherCode={day.weatherCode}
+                    className=" h-8 w-8"
+                  />
+                  <div className="flex w-[60%] flex-row gap-2 overflow-hidden">
+                    <div className="flex w-full select-none flex-row items-center justify-between gap-2 pr-2 text-sm">
+                      <p className="flex w-[3rem] min-w-fit justify-end text-neutral-600 dark:text-neutral-400">
+                        {Math.floor(day.temperature.min)}&deg;
+                      </p>
+                      <TemperatureRange
+                        min={minTemperature}
+                        max={maxTemperature}
+                        value={[day.temperature.min, day.temperature.max]}
+                      />
+                      <p className="flex w-[3rem] min-w-fit justify-end">
+                        {Math.floor(day.temperature.max)}&deg;
+                      </p>
+                    </div>
                   </div>
                 </div>
+                {i !== data.daily.time.length - 1 && (
+                  <Separator className="mt-3" />
+                )}
               </div>
-              {i !== data.list.length - 1 && <Separator className="mt-3" />}
-            </div>
-          ))}
+            )
+          })}
         </CardContent>
       </Card>
     </>

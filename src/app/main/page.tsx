@@ -2,6 +2,7 @@ import React from "react"
 import { Metadata } from "next"
 import {
   AirPollutionData,
+  NewForecastData,
   OpenWeatherData,
   UvIndexData,
   WeatherForecastData,
@@ -10,6 +11,7 @@ import {
 import { DEFAULT_LOCATION } from "@/config/site"
 import GetAirPollution from "@/lib/api/getAirPollution"
 import GetCurrentWeather from "@/lib/api/GetCurrentWeather"
+import GetNewWeatherForecast from "@/lib/api/GetNewWeatherForecast"
 import GetUVData from "@/lib/api/getUVData"
 import GetWeatherForecast from "@/lib/api/GetWeatherForecast"
 import Map from "@/components/widgets/Map"
@@ -39,7 +41,6 @@ export async function generateMetadata({
   const placesname = CurrentWeatherData.sys.country
     ? `${CurrentWeatherData.name}, ${CurrentWeatherData.sys.country}`
     : CurrentWeatherData.name
-  console.log(CurrentWeatherData.sys.country)
   return {
     title: `${placesname || coord} - Weather Forecast`,
     description: `${placesname || coord}  weather forecast with current conditions, wind, air quality, and what to expect for the next 3 days.`,
@@ -66,6 +67,10 @@ export default async function MainPage({
     lat,
     lon,
   })
+  const NewWeatherForecastData: NewForecastData = await GetNewWeatherForecast({
+    lat,
+    lon,
+  })
   const AirPollutionData: AirPollutionData = await GetAirPollution({
     lat,
     lon,
@@ -86,7 +91,10 @@ export default async function MainPage({
       <div className="flex flex-col gap-4 md:flex-row">
         <div className="flex w-full min-w-[18rem] flex-col gap-4 md:w-1/2">
           <WidgetCurrentWeather data={CurrentWeather} />
-          <WidgetForecast data={WeatherForecastData} />
+          <WidgetForecast
+            data={NewWeatherForecastData}
+            timezone={WeatherForecastData.city.timezone}
+          />
         </div>
         <section className="grid h-full grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
           <WeatherWidgets
