@@ -1,3 +1,5 @@
+import { Suspense } from "react"
+
 import { siteConfig } from "@/config/site"
 
 import CommandDialogSearchBar from "./CommandDialogSearchBar"
@@ -13,7 +15,9 @@ export default function Navigation() {
       </div>
       <div className="flex items-center gap-4">
         {/* <CommandDialogSearchBar />  Need an google map api*/}
-        <Search />
+        <Suspense>
+          <Search />
+        </Suspense>
         <ModeToggle />
       </div>
     </nav>
