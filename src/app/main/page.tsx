@@ -15,6 +15,7 @@ import GetWeatherForecast from "@/lib/api/GetWeatherForecast"
 import Map from "@/components/widgets/Map"
 import WeatherWidgets from "@/components/widgets/WeatherWidgets"
 import WidgetCurrentWeather from "@/components/widgets/WidgetCurrentWeather"
+import WidgetForecast from "@/components/widgets/WidgetForecast"
 
 export async function generateMetadata({
   searchParams,
@@ -85,6 +86,7 @@ export default async function MainPage({
       <div className="flex flex-col gap-4 md:flex-row">
         <div className="flex w-full min-w-[18rem] flex-col gap-4 md:w-1/2">
           <WidgetCurrentWeather data={CurrentWeather} />
+          <WidgetForecast data={WeatherForecastData} />
         </div>
         <section className="grid h-full grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
           <WeatherWidgets
