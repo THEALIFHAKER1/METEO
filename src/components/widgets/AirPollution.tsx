@@ -25,12 +25,12 @@ export default function AirPollution({
   return (
     <Card
       className={cn(
-        "order-2 col-span-2 flex h-[197px] flex-col justify-between",
+        "order-2 col-span-2 flex h-48 flex-col justify-between",
         className
       )}
     >
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-sm">
+        <CardTitle className="flex items-center gap-4 text-sm">
           <i>
             <svg
               viewBox="0 0 24 24"

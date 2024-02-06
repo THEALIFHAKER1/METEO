@@ -82,11 +82,11 @@ export default async function MainPage({
 
   return (
     <>
-      <div className="flex flex-col gap-2 md:flex-row">
+      <div className="flex flex-col gap-4 md:flex-row">
         <div className="flex w-full min-w-[18rem] flex-col gap-4 md:w-1/2">
           <WidgetCurrentWeather data={CurrentWeather} />
         </div>
-        <section className="grid h-full grid-cols-2 gap-2 lg:grid-cols-3 xl:grid-cols-4">
+        <section className="grid h-full grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
           <WeatherWidgets
             data={CurrentWeather}
             airQuality={AirPollution}

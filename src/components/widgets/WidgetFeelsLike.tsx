@@ -11,9 +11,9 @@ import {
 
 function WidgetFeelsLike({ data }: { data: OpenWeatherData }) {
   return (
-    <Card className="order-7 flex h-[197px] flex-col justify-between">
+    <Card className="order-7 flex h-48 flex-col justify-between">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-sm">
+        <CardTitle className="flex items-center gap-4 text-sm">
           <i>
             <svg
               xmlns="http://www.w3.org/2000/svg"

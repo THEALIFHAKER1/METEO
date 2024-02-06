@@ -54,7 +54,7 @@ export default function Search() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleSearch)}
-            className="flex gap-2 "
+            className="flex gap-4 "
           >
             <FormField
               control={form.control}
@@ -115,7 +115,7 @@ export default function Search() {
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(handleSearch)}
-                className="m-7 flex flex-col gap-2 "
+                className="m-7 flex flex-col gap-4 "
               >
                 <FormField
                   control={form.control}

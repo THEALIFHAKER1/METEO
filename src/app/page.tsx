@@ -18,14 +18,14 @@ export default function Home() {
         <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
           {siteConfig.description}
         </p>
-        <div className="flex gap-2">
+        <div className="flex gap-4">
           <Button>
             <Link href={"/main"}>Start</Link>
           </Button>
           <Link
             href={siteConfig.links.github}
             target="_blank"
-            className={`gap-2 ${cn(buttonVariants({ size: "default" }))}`}
+            className={`gap-4 ${cn(buttonVariants({ size: "default" }))}`}
           >
             <Icons.github className="h-[1.2rem] w-[1.2rem] " />
             GitHub

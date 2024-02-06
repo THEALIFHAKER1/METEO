@@ -11,7 +11,7 @@ export default function Navigation() {
         <p className="text-2xl">🌦️</p>
         <p className="text-2xl font-bold">{siteConfig.name}</p>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-4">
         {/* <CommandDialogSearchBar />  Need an google map api*/}
         <Search />
         <ModeToggle />
