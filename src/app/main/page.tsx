@@ -8,10 +8,11 @@ import {
 } from "@/types"
 
 import { DEFAULT_LOCATION } from "@/config/site"
-import GetAirPollution from "@/lib/api/GetAirPollution"
+import GetAirPollution from "@/lib/api/getAirPollution"
 import GetCurrentWeather from "@/lib/api/GetCurrentWeather"
-import GetUVData from "@/lib/api/GetUVData"
+import GetUVData from "@/lib/api/getUVData"
 import GetWeatherForecast from "@/lib/api/GetWeatherForecast"
+import Map from "@/components/widgets/Map"
 import WeatherWidgets from "@/components/widgets/WeatherWidgets"
 import WidgetCurrentWeather from "@/components/widgets/WidgetCurrentWeather"
 
@@ -91,6 +92,7 @@ export default async function MainPage({
             airQuality={AirPollution}
             uvIndexForToday={UvIndex}
           />
+          <Map />
         </section>
       </div>
     </>

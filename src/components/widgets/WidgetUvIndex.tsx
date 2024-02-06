@@ -11,7 +11,7 @@ import { Progress } from "../ui/progress"
 
 function WidgetUvIndex({ uvIndexForToday }: { uvIndexForToday: number }) {
   return (
-    <Card className="order-5 flex h-[197px] flex-col justify-between">
+    <Card className="order-5 flex h-[197px] flex-col justify-between lg:col-span-2 xl:col-span-1">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-sm">
           <i>
