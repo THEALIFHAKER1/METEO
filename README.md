@@ -1,6 +1,6 @@
-# NEXT INITIATE
+# METEO
 
-NEXT.js 14+ starter template with app router, shadcn/ui, typesafe env, icons and configs setup.
+NEXT.js 14+ weather app with app router, shadcn/ui, typesafe env, icons and configs setup.
 
 ## Usage
 
