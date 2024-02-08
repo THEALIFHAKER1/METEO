@@ -56,7 +56,7 @@ export default function WidgetForecast({ data }: WidgetForecastProps) {
 
   return (
     <>
-      <Card className=" h-[25rem]  shrink-0 overflow-auto">
+      <Card className=" shrink-0 overflow-auto md:h-[53rem] lg:h-[39rem] xl:h-[27rem]">
         <CardHeader>
           <CardTitle className="flex items-center gap-4 text-sm">
             <i>
@@ -145,7 +145,7 @@ export default function WidgetForecast({ data }: WidgetForecastProps) {
             Forecast for the next 7 days
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-2 text-base font-normal md:mb-1">
+        <CardContent className="space-y-2 overflow-auto text-base font-normal md:mb-1">
           {forecast.map((day, i) => {
             return (
               <div key={i}>

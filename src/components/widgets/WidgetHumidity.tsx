@@ -11,7 +11,7 @@ import {
 
 function WidgetHumidity({ data }: { data: OpenWeatherData }) {
   return (
-    <Card className="order-8 flex h-48 flex-col justify-between">
+    <Card className="order-8 flex h-48 flex-col justify-between overflow-auto">
       <CardHeader>
         <CardTitle className="flex items-center gap-4 text-sm">
           <i>

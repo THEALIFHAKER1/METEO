@@ -88,7 +88,7 @@ export default async function MainPage({
 
   return (
     <>
-      <div className="flex flex-col gap-4 md:flex-row">
+      <div className="flex flex-col gap-4 pb-5 md:flex-row">
         <div className="flex w-full min-w-[18rem] flex-col gap-4 md:w-1/2">
           <WidgetCurrentWeather data={CurrentWeather} />
           <WidgetForecast
