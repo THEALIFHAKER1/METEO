@@ -71,7 +71,7 @@ export default function Map() {
   const [viewport, setViewport] = useState({
     latitude: lat ? Number(lat) : Number(defaultLat),
     longitude: lon ? Number(lon) : Number(defaultLon),
-    zoom: 7,
+    zoom: 9,
     pitch: 60,
     bearing: -60,
   })
