@@ -12,6 +12,7 @@ export const env = createEnv({
       .enum(["development", "test", "production"])
       .default("development"),
     OPEN_WEATHER_API_KEY: z.string().min(1),
+    MAP_CODE: z.string().min(1),
   },
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
@@ -24,6 +25,7 @@ export const env = createEnv({
     NEXT_PUBLIC_DOCS_URL: process.env.NEXT_PUBLIC_DOCS_URL,
     NODE_ENV: process.env.NODE_ENV,
     OPEN_WEATHER_API_KEY: process.env.OPEN_WEATHER_API_KEY,
+    MAP_CODE: process.env.MAP_CODE,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

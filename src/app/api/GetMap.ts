@@ -1,19 +1,26 @@
 import { env } from "@/env.js"
 
 export default async function GetMap() {
-  // if (!env.OPEN_WEATHER_API_KEY) {
-  //   throw new Error("Open Weather API Key is not set")
-  // }
+  try {
+    const KEY = env.OPEN_WEATHER_API_KEY
+    const MapCode = env.MAP_CODE
+    if (!env.OPEN_WEATHER_API_KEY) {
+      throw new Error("Open Weather API Key is not set")
+    }
+    if (!env.MAP_CODE) {
+      throw new Error("Map Code is not set")
+    }
+    const apiUrl = `https://maps.openweathermap.org/maps/2.0/weather/${MapCode}/{z}/{x}/{y}?appid=${KEY}`
+    const response = await fetch(apiUrl, {
+      cache: "no-cache",
+    })
 
-  const MapCode = "PR0"
-  const appid = "55e3a721fdb6dd960a787cff1f9ffa34"
-  const apiUrl = `https://maps.openweathermap.org/maps/2.0/weather/${MapCode}/{z}/{x}/{y}?appid=${appid}`
-  const response = await fetch(apiUrl, {
-    cache: "no-cache",
-  })
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch weather data")
+    if (!response.ok) {
+      throw new Error("Failed to fetch weather data")
+    }
+    return response.json()
+  } catch (error) {
+    console.error(error)
+    throw error
   }
-  return response.json()
 }
