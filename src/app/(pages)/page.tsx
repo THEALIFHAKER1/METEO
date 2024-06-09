@@ -4,11 +4,11 @@ import Link from "next/link"
 import { DEFAULT_LOCATION, siteConfig } from "@/configs/site"
 
 import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import TextDecryption from "@/components/custom/text-decryption"
 import { ThemeSwitcher } from "@/components/custom/theme-switcher"
 import { Icons } from "@/components/icons/icons"
-import GetLocation from "@/app/getLocation"
+import GetLocation from "@/app/api/getLocation"
 
 type searchParams = Record<string, string>
 

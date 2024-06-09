@@ -1,8 +1,18 @@
 import { type Metadata } from "next"
 import { DEFAULT_LOCATION, siteConfig } from "@/configs/site"
-import { type OpenWeatherData } from "@/types"
+import {
+  type AirPollutionData,
+  type NewForecastData,
+  type OpenWeatherData,
+  type UvIndexData,
+  type WeatherForecastData,
+} from "@/types"
 
+import GetAirPollution from "@/app/api/getAirPollution"
 import GetCurrentWeather from "@/app/api/GetCurrentWeather"
+import GetNewWeatherForecast from "@/app/api/GetNewWeatherForecast"
+import GetUVData from "@/app/api/getUVData"
+import GetWeatherForecast from "@/app/api/GetWeatherForecast"
 
 type searchParams = Record<string, string>
 
@@ -60,6 +70,43 @@ export async function generateMetadata({
   }
 }
 
-export default function MainPage() {
-  return <>MainPage</>
+export default async function MainPage({
+  searchParams,
+}: {
+  searchParams: searchParams
+}) {
+  const lat = searchParams?.lat ?? DEFAULT_LOCATION.coord.lat
+  const lon = searchParams?.lon ?? DEFAULT_LOCATION.coord.lon
+
+  const CurrentWeatherData: OpenWeatherData = (await GetCurrentWeather({
+    lat,
+    lon,
+  })) as OpenWeatherData
+
+  const WeatherForecastData: WeatherForecastData = (await GetWeatherForecast({
+    lat,
+    lon,
+  })) as WeatherForecastData
+
+  const NewWeatherForecastData: NewForecastData = (await GetNewWeatherForecast({
+    lat,
+    lon,
+  })) as NewForecastData
+
+  const AirPollutionData: AirPollutionData = (await GetAirPollution({
+    lat,
+    lon,
+  })) as AirPollutionData
+
+  const UvIndexData: UvIndexData = (await GetUVData({
+    lat,
+    lon,
+  })) as UvIndexData
+
+  const [CurrentWeather, AirPollution, UvIndex] = await Promise.all([
+    CurrentWeatherData,
+    AirPollutionData.list[0],
+    UvIndexData.daily.uv_index_max[0],
+  ])
+  return <></>
 }
