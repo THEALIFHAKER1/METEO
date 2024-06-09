@@ -90,10 +90,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <WrapperPage>
-            <main
-              vaul-drawer-wrapper=""
-              className="mx-auto h-full max-w-screen-2xl"
-            >
+            <main vaul-drawer-wrapper="" className="h-full">
               {children}
             </main>
           </WrapperPage>

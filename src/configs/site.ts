@@ -3,10 +3,10 @@ import { type SiteTypes } from "@/types"
 import { env } from "@/env.js"
 
 export const siteConfig: SiteTypes = {
-  name: "NEXT INITIATE",
+  name: "METEO",
   author: "THEALIFHAKER1",
   description:
-    "Next.js 14+ starter template with app router, shadcn/ui, typesafe env, icons and configs setup.",
+    "Real-time weather app build with Next.js 14, Typescript and Shadcn UI. That gives you all the weather information you need.",
   keywords: [
     "next",
     "react",
@@ -24,8 +24,16 @@ export const siteConfig: SiteTypes = {
     author: "https://ae1.tech",
   },
   links: {
-    github: "https://github.com/THEALIFHAKER1/NEXT-INITIATE",
+    github: "https://github.com/THEALIFHAKER1/METEO",
     docs: `${env.NEXT_PUBLIC_DOCS_URL}`,
   },
   ogImage: `${env.NEXT_PUBLIC_APP_URL}/api/og`,
+}
+
+export const DEFAULT_LOCATION: Location = {
+  city: "Kuala Lumpur, MY",
+  coord: {
+    lat: "3.1499",
+    lon: "101.6945",
+  },
 }

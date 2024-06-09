@@ -1,10 +1,7 @@
-import {
-  CheckCheck,
-  Moon,
-  SunMedium,
-  Triangle,
-  TriangleAlert,
-} from "lucide-react"
+import { GitHubLogoIcon } from "@radix-ui/react-icons"
+import { CloudSun, Moon, SunMedium, Triangle } from "lucide-react"
+import { FaCheckCircle } from "react-icons/fa"
+import { IoMdAlert } from "react-icons/io"
 
 export type IconKeys = keyof typeof icons
 
@@ -13,11 +10,12 @@ type IconsType = {
 }
 
 const icons = {
-  logo: Triangle,
+  logo: CloudSun,
   sun: SunMedium,
   moon: Moon,
-  danger: TriangleAlert,
-  success: CheckCheck,
+  github: GitHubLogoIcon,
+  danger: IoMdAlert,
+  success: FaCheckCircle,
 }
 
 export const Icons: IconsType = icons
