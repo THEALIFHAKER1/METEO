@@ -1,8 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from "next/og"
 import { type NextRequest } from "next/server"
+import { DEFAULT_LOCATION } from "@/configs/site"
+import { type OpenWeatherData } from "@/types"
 
 import { env } from "@/env.js"
+
+import GetCurrentWeather from "../GetCurrentWeather"
 
 export const runtime = "edge"
 
@@ -13,7 +17,14 @@ const interBold = fetch(
 export async function GET(_req: NextRequest) {
   try {
     const fontBold = await interBold
+    const { searchParams } = _req.nextUrl
+    const lat = searchParams.get("lat")
+    const lon = searchParams.get("lon")
 
+    const CurrentWeatherData: OpenWeatherData = (await GetCurrentWeather({
+      lat: lat ?? "",
+      lon: lon ?? "",
+    })) as OpenWeatherData
     return new ImageResponse(
       (
         <div
@@ -29,6 +40,16 @@ export async function GET(_req: NextRequest) {
             border: "8px solid white",
           }}
         >
+          <h1
+            style={{
+              fontFamily: "Inter",
+              fontSize: "3rem",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            {CurrentWeatherData.name ?? DEFAULT_LOCATION.city}
+          </h1>
           <img
             width={300}
             height={300}

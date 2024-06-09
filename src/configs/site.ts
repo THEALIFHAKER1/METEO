@@ -1,4 +1,4 @@
-import { type SiteTypes } from "@/types"
+import { type Location, type SiteTypes } from "@/types"
 
 import { env } from "@/env.js"
 
