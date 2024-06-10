@@ -1,5 +1,5 @@
 import { GitHubLogoIcon } from "@radix-ui/react-icons"
-import { CloudSun, Moon, SunMedium, Triangle } from "lucide-react"
+import { CloudSun, Moon, SunMedium } from "lucide-react"
 import { FaCheckCircle } from "react-icons/fa"
 import { IoMdAlert } from "react-icons/io"
 

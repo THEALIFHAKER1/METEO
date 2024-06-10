@@ -1,7 +1,6 @@
 import { Suspense } from "react"
 import { siteConfig } from "@/configs/site"
 
-import CommandDialogSearchBar from "../custom/CommandDialogSearchBar"
 import Search from "../custom/Search"
 import { ThemeSwitcher } from "../custom/theme-switcher"
 
@@ -13,7 +12,7 @@ export default function Navbar() {
         <p className="text-2xl font-bold">{siteConfig.name}</p>
       </div>
       <div className="flex items-center gap-4">
-        <CommandDialogSearchBar />
+        {/* <CommandDialogSearchBar /> */}
         {/* Need an google map api key to use this feature */}
         <Suspense>
           <Search />

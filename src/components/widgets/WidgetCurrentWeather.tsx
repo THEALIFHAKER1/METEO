@@ -1,4 +1,4 @@
-import { type OpenWeatherData } from "@/types"
+import { type CurrentWeatherData } from "@/types"
 
 import { convertToDate } from "@/lib/dateUtils"
 import { Card } from "@/components/ui/card"
@@ -7,7 +7,7 @@ import Clock from "../custom/clock"
 import IconComponent from "../custom/icon-component"
 
 interface CurrentWeatherProps {
-  data: OpenWeatherData
+  data: CurrentWeatherData
 }
 
 export default function WidgetCurrentWeather({ data }: CurrentWeatherProps) {

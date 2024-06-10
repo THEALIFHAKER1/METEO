@@ -17,15 +17,7 @@ type SliderProps = {
 
 const TemperatureRange = React.forwardRef(
   (
-    {
-      className,
-      min,
-      max,
-      formatLabel,
-      value,
-      onValueChange,
-      ...props
-    }: SliderProps,
+    { className, min, max, value, onValueChange, ...props }: SliderProps,
     ref
   ) => {
     const initialValue = Array.isArray(value) ? value : [min, max]

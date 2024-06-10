@@ -2,7 +2,7 @@
 import { ImageResponse } from "next/og"
 import { type NextRequest } from "next/server"
 import { DEFAULT_LOCATION } from "@/configs/site"
-import { type OpenWeatherData } from "@/types"
+import { type CurrentWeatherData } from "@/types"
 
 import { env } from "@/env.js"
 
@@ -21,10 +21,10 @@ export async function GET(_req: NextRequest) {
     const lat = searchParams.get("lat")
     const lon = searchParams.get("lon")
 
-    const CurrentWeatherData: OpenWeatherData = (await GetCurrentWeather({
+    const CurrentWeatherData: CurrentWeatherData = (await GetCurrentWeather({
       lat: lat ?? "",
       lon: lon ?? "",
-    })) as OpenWeatherData
+    })) as CurrentWeatherData
     return new ImageResponse(
       (
         <div

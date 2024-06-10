@@ -1,12 +1,12 @@
 import { type Metadata } from "next"
 import { DEFAULT_LOCATION, siteConfig } from "@/configs/site"
-import { type CurrentWeatherData } from "@/types"
+import { type CurrentWeatherData, type DailyForecastData } from "@/types"
 
 import Navbar from "@/components/layout/navbar"
 import WidgetCurrentWeather from "@/components/widgets/WidgetCurrentWeather"
+import WidgetDailyForecast from "@/components/widgets/WidgetDailyForecast"
 import GetCurrentWeather from "@/app/api/GetCurrentWeather"
-
-// import GetUVData from "@/app/api/getUVData"
+import getDailyForecast from "@/app/api/getDailyForecast"
 
 type searchParams = Record<string, string>
 
@@ -77,10 +77,15 @@ export default async function MainPage({
     lon,
   })) as CurrentWeatherData
 
-  const [
-    CurrentWeatherData,
-    //air_pollution, uv_index
-  ] = await Promise.all([CurrentWeather])
+  const DailyForecast: DailyForecastData = (await getDailyForecast({
+    lat,
+    lon,
+  })) as DailyForecastData
+
+  const [CurrentWeatherData, DailyForecastData] = await Promise.all([
+    CurrentWeather,
+    DailyForecast,
+  ])
 
   return (
     <>
@@ -88,6 +93,7 @@ export default async function MainPage({
       <div className="flex h-[95%] flex-col gap-4 pb-5 md:flex-row">
         <div className="flex w-full min-w-[18rem] flex-col gap-4 md:w-1/2">
           <WidgetCurrentWeather data={CurrentWeatherData} />
+          <WidgetDailyForecast data={DailyForecastData} />
         </div>
         <section className="grid h-full grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4"></section>
       </div>
