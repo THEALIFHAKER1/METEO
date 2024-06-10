@@ -8,7 +8,8 @@ import { buttonVariants } from "@/components/ui/button"
 import TextDecryption from "@/components/custom/text-decryption"
 import { ThemeSwitcher } from "@/components/custom/theme-switcher"
 import { Icons } from "@/components/icons/icons"
-import GetLocation from "@/app/api/getLocation"
+
+import GetLocation from "../api/getLocation"
 
 type searchParams = Record<string, string>
 

@@ -1,18 +1,12 @@
 import { type Metadata } from "next"
 import { DEFAULT_LOCATION, siteConfig } from "@/configs/site"
-import {
-  type AirPollutionData,
-  type NewForecastData,
-  type OpenWeatherData,
-  type UvIndexData,
-  type WeatherForecastData,
-} from "@/types"
+import { type CurrentWeatherData } from "@/types"
 
-import GetAirPollution from "@/app/api/getAirPollution"
+import Navbar from "@/components/layout/navbar"
+import WidgetCurrentWeather from "@/components/widgets/WidgetCurrentWeather"
 import GetCurrentWeather from "@/app/api/GetCurrentWeather"
-import GetNewWeatherForecast from "@/app/api/GetNewWeatherForecast"
-import GetUVData from "@/app/api/getUVData"
-import GetWeatherForecast from "@/app/api/GetWeatherForecast"
+
+// import GetUVData from "@/app/api/getUVData"
 
 type searchParams = Record<string, string>
 
@@ -32,10 +26,10 @@ export async function generateMetadata({
       description: `${DEFAULT_LOCATION.city} weather forecast with current conditions, wind, air quality, and what to expect for the next 3 days.`,
     }
   }
-  const CurrentWeatherData: OpenWeatherData = (await GetCurrentWeather({
+  const CurrentWeatherData: CurrentWeatherData = (await GetCurrentWeather({
     lat,
     lon,
-  })) as OpenWeatherData
+  })) as CurrentWeatherData
 
   const coord = `${CurrentWeatherData.coord.lat}, ${CurrentWeatherData.coord.lon}`
   const placesname = CurrentWeatherData.sys.country
@@ -78,35 +72,25 @@ export default async function MainPage({
   const lat = searchParams?.lat ?? DEFAULT_LOCATION.coord.lat
   const lon = searchParams?.lon ?? DEFAULT_LOCATION.coord.lon
 
-  const CurrentWeatherData: OpenWeatherData = (await GetCurrentWeather({
+  const CurrentWeather: CurrentWeatherData = (await GetCurrentWeather({
     lat,
     lon,
-  })) as OpenWeatherData
+  })) as CurrentWeatherData
 
-  const WeatherForecastData: WeatherForecastData = (await GetWeatherForecast({
-    lat,
-    lon,
-  })) as WeatherForecastData
-
-  const NewWeatherForecastData: NewForecastData = (await GetNewWeatherForecast({
-    lat,
-    lon,
-  })) as NewForecastData
-
-  const AirPollutionData: AirPollutionData = (await GetAirPollution({
-    lat,
-    lon,
-  })) as AirPollutionData
-
-  const UvIndexData: UvIndexData = (await GetUVData({
-    lat,
-    lon,
-  })) as UvIndexData
-
-  const [CurrentWeather, AirPollution, UvIndex] = await Promise.all([
+  const [
     CurrentWeatherData,
-    AirPollutionData.list[0],
-    UvIndexData.daily.uv_index_max[0],
-  ])
-  return <></>
+    //air_pollution, uv_index
+  ] = await Promise.all([CurrentWeather])
+
+  return (
+    <>
+      <Navbar />
+      <div className="flex h-[95%] flex-col gap-4 pb-5 md:flex-row">
+        <div className="flex w-full min-w-[18rem] flex-col gap-4 md:w-1/2">
+          <WidgetCurrentWeather data={CurrentWeatherData} />
+        </div>
+        <section className="grid h-full grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4"></section>
+      </div>
+    </>
+  )
 }
