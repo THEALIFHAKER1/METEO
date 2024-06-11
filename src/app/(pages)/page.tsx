@@ -18,8 +18,8 @@ export default function HomePage({
 }: {
   searchParams: searchParams
 }) {
-  const lat = searchParams?.lat
-  const lon = searchParams?.lon
+  const lat = searchParams.lat
+  const lon = searchParams.lon
 
   return (
     <>
