@@ -90,7 +90,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ScreenSizeDetector />
           <WrapperPage>
             <main vaul-drawer-wrapper="" className="h-full">
               {children}
