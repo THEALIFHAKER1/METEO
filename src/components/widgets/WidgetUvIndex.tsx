@@ -11,7 +11,7 @@ import { Progress } from "../ui/progress"
 
 function WidgetUvIndex({ uvIndexForToday }: { uvIndexForToday: number }) {
   return (
-    <Card className="order-5 flex h-48 flex-col justify-between lg:col-span-2 xl:col-span-1">
+    <Card className="order-3 flex flex-col justify-between lg:col-span-2 xl:col-span-1">
       <CardHeader>
         <CardTitle className="flex items-center gap-4 text-sm">
           <i>
@@ -53,7 +53,7 @@ function WidgetUvIndex({ uvIndexForToday }: { uvIndexForToday: number }) {
         <Progress aria-label="UV Index" value={uvIndexForToday * 10} />
       </CardContent>
       <CardFooter>
-        <p>
+        <p className="text-sm">
           {uvIndexForToday <= 2
             ? "No protection needed."
             : uvIndexForToday <= 5

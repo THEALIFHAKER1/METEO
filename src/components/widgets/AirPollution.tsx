@@ -25,7 +25,7 @@ export default function AirPollution({
   return (
     <Card
       className={cn(
-        "order-2 col-span-2 flex h-48 flex-col justify-between",
+        "order-2 col-span-2 flex flex-col justify-between md:col-span-1 lg:col-span-3 xl:col-span-1",
         className
       )}
     >
@@ -81,7 +81,7 @@ export default function AirPollution({
         <Progress aria-label="Air pollution" value={airQuality.main.aqi * 10} />
       </CardContent>
       <CardFooter>
-        <p>
+        <p className="text-sm">
           {airQuality.main.aqi < 50
             ? "Air quality is good."
             : airQuality.main.aqi < 100

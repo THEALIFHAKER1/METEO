@@ -11,7 +11,7 @@ import {
 
 function WidgetPreassure({ data }: { data: CurrentWeatherData }) {
   return (
-    <Card className="order-10 flex h-48 flex-col justify-between">
+    <Card className="order-7 flex  flex-col justify-between">
       <CardHeader>
         <CardTitle className="flex items-center gap-4 text-sm">
           <i>
@@ -36,7 +36,7 @@ function WidgetPreassure({ data }: { data: CurrentWeatherData }) {
         <p>{data.main.pressure} hPa</p>
       </CardContent>
       <CardFooter>
-        <p>
+        <p className="w-3/4 text-sm">
           {data.main.pressure < 1000
             ? "Low pressure. Expect changes in the weather."
             : data.main.pressure >= 1000 && data.main.pressure <= 1010

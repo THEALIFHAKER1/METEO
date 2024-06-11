@@ -63,7 +63,7 @@ export default function Map() {
   const [viewport, setViewport] = useState({
     latitude: lat ? Number(lat) : Number(defaultLat),
     longitude: lon ? Number(lon) : Number(defaultLon),
-    zoom: 7,
+    zoom: 12,
     pitch: 60,
     bearing: -60,
   })
@@ -79,7 +79,7 @@ export default function Map() {
   }, [lat, lon, defaultLat, defaultLon])
 
   return (
-    <Card className="order-11 col-span-2 h-[25rem] overflow-hidden overscroll-contain  p-0 md:p-0 xl:col-span-3">
+    <Card className="relative order-11 col-span-2 h-[25rem] overflow-hidden overscroll-contain lg:col-span-3 xl:col-span-4">
       <div className="absolute right-0 z-10 m-2">
         <Select value={MapCode} onValueChange={setMapCode}>
           <SelectTrigger aria-label="Map layer" className="w-fit">

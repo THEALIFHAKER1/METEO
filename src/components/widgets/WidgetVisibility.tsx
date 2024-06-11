@@ -10,7 +10,7 @@ import {
 
 function WidgetVisibility({ data }: { data: { visibility: number } }) {
   return (
-    <Card className="order-9 flex h-48 flex-col justify-between">
+    <Card className="order-6 flex  flex-col justify-between">
       <CardHeader>
         <CardTitle className="flex items-center gap-4 text-sm">
           <i>
@@ -38,7 +38,7 @@ function WidgetVisibility({ data }: { data: { visibility: number } }) {
         <p>{data.visibility / 1000} km</p>
       </CardContent>
       <CardFooter>
-        <p>
+        <p className="text-sm">
           {data.visibility >= 10
             ? "It's perfectly clear right now."
             : data.visibility >= 5

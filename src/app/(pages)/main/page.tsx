@@ -118,7 +118,7 @@ export default async function MainPage({
 
   return (
     <>
-      <div className="flex h-full flex-col gap-4 pb-5 md:flex-row">
+      <div className="flex flex-col gap-4 md:h-full md:flex-row">
         <div className="flex w-full min-w-[18rem] flex-col gap-4 md:w-1/2">
           <WidgetCurrentWeather data={CurrentWeatherData} />
           <WidgetDailyForecast
@@ -126,13 +126,13 @@ export default async function MainPage({
             timezone={CurrentWeatherData.timezone}
           />
         </div>
-        <section className="grid h-full grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
+        <section className="grid h-full grid-cols-2 gap-4 overflow-auto lg:grid-cols-3 xl:grid-cols-4">
+          <WidgetHourlyForecast data={HourlyForecastData} />
           <WeatherWidgets
             data={CurrentWeather}
             airQuality={AirPollutionData.list[0]!}
             uvIndexForToday={UVIndexData.daily.uv_index_max[0]!}
           />
-          <WidgetHourlyForecast data={HourlyForecastData} />
           <Map />
         </section>
       </div>

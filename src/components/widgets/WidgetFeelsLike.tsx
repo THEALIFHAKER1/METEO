@@ -11,7 +11,7 @@ import {
 
 function WidgetFeelsLike({ data }: { data: CurrentWeatherData }) {
   return (
-    <Card className="order-7 flex h-48 flex-col justify-between">
+    <Card className="order-4 flex  flex-col justify-between">
       <CardHeader>
         <CardTitle className="flex items-center gap-4 text-sm">
           <i>
@@ -35,7 +35,7 @@ function WidgetFeelsLike({ data }: { data: CurrentWeatherData }) {
         <p>{Math.floor(data.main.feels_like)}&deg;</p>
       </CardContent>
       <CardFooter>
-        <p>
+        <p className="text-sm">
           {data.main.feels_like < data.main.temp
             ? "Feels colder than the actual temperature."
             : data.main.feels_like > data.main.temp

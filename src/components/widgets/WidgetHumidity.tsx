@@ -11,7 +11,7 @@ import {
 
 function WidgetHumidity({ data }: { data: CurrentWeatherData }) {
   return (
-    <Card className="order-8 flex h-48 flex-col justify-between overflow-auto">
+    <Card className="order-5 flex  flex-col justify-between overflow-auto">
       <CardHeader>
         <CardTitle className="flex items-center gap-4 text-sm">
           <i>
@@ -35,7 +35,7 @@ function WidgetHumidity({ data }: { data: CurrentWeatherData }) {
         <p>74&deg;</p>
       </CardContent>
       <CardFooter>
-        <p>
+        <p className="text-sm">
           {data.main.humidity < 40
             ? "Low humidity. It might feel dry."
             : data.main.humidity < 70

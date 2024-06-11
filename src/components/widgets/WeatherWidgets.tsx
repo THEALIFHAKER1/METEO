@@ -21,8 +21,8 @@ export default function WeatherWidgets({
 }: WeatherWidgetsProps) {
   return (
     <>
-      <AirPollution airQuality={airQuality} />
       <WidgetCompass data={data} />
+      <AirPollution airQuality={airQuality} />
       <WidgetUvIndex uvIndexForToday={uvIndexForToday} />
       <WidgetFeelsLike data={data} />
       <WidgetHumidity data={data} />

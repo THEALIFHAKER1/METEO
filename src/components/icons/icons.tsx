@@ -1,5 +1,5 @@
 import { GitHubLogoIcon } from "@radix-ui/react-icons"
-import { CloudSun, Moon, SunMedium } from "lucide-react"
+import { Clock, CloudSun, Moon, SunMedium } from "lucide-react"
 import { FaCheckCircle } from "react-icons/fa"
 import { IoMdAlert } from "react-icons/io"
 
@@ -10,6 +10,7 @@ type IconsType = {
 }
 
 const icons = {
+  clock: Clock,
   logo: CloudSun,
   sun: SunMedium,
   moon: Moon,

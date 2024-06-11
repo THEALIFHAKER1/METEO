@@ -5,7 +5,8 @@ import { type DailyAndHourlyForecastData, type ForecastData } from "@/types"
 import { useDraggable } from "react-use-draggable-scroll"
 
 import IconComponent from "../custom/icon-component"
-import { Card } from "../ui/card"
+import { Icons } from "../icons/icons"
+import { Card, CardHeader, CardTitle } from "../ui/card"
 
 interface HourlyForecastProps {
   data: DailyAndHourlyForecastData["hourly"]
@@ -28,8 +29,14 @@ export default function WidgetHourlyForecast({ data }: HourlyForecastProps) {
         ref={ref}
         {...events}
         tabIndex={0}
-        className="order-first col-span-2 flex h-48 cursor-grab touch-auto touch-pan-x select-none scroll-px-0.5 flex-row items-center justify-between gap-12 overflow-auto  scroll-smooth p-6 ring-offset-background transition-colors hover:overflow-x-auto focus:scroll-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:order-2 lg:order-3"
+        className="order-first col-span-2 flex cursor-grab  touch-auto touch-pan-x select-none scroll-px-0.5 flex-row items-center justify-between gap-12 overflow-auto scroll-smooth  p-6 ring-offset-background transition-colors hover:overflow-x-auto focus:scroll-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:col-span-1 lg:col-span-2 xl:col-span-1"
       >
+        <CardHeader>
+          <CardTitle className="flex items-center gap-4 text-sm">
+            <Icons.clock />
+            Hourly Forecast
+          </CardTitle>
+        </CardHeader>
         {data.slice(0, 12).map((item: ForecastData, i) => (
           <>
             <div key={item.dt} className="flex h-full flex-col justify-between">

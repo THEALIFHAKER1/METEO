@@ -9,7 +9,7 @@ interface WidgetCompassProps {
 }
 function WidgetCompass({ data }: WidgetCompassProps) {
   return (
-    <Card className="order-4 h-48 xl:order-3">
+    <Card className=" order-4 md:order-1">
       <CardHeader>
         <CardTitle className="flex items-center gap-4 text-sm">
           <i>
