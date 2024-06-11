@@ -7,6 +7,7 @@ import {
   type UVIndexData,
 } from "@/types"
 
+import Navbar from "@/components/layout/navbar"
 import Map from "@/components/widgets/Map"
 import WeatherWidgets from "@/components/widgets/WeatherWidgets"
 import WidgetCurrentWeather from "@/components/widgets/WidgetCurrentWeather"
@@ -118,7 +119,8 @@ export default async function MainPage({
 
   return (
     <>
-      <div className="flex flex-col gap-4 md:h-full md:flex-row">
+      <Navbar />
+      <div className="flex flex-col gap-4 md:h-[92%] md:flex-row ">
         <div className="flex w-full min-w-[18rem] flex-col gap-4 md:w-1/2">
           <WidgetCurrentWeather data={CurrentWeatherData} />
           <WidgetDailyForecast

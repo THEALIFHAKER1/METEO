@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { DEFAULT_LOCATION, siteConfig } from "@/configs/site"
+import { siteConfig } from "@/configs/site"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
@@ -36,21 +36,13 @@ export default function HomePage({
           {siteConfig.description}
         </p>
         <div className="flex gap-2">
-          {lat && lon ? (
-            <Link
-              href={`/main?lat=${lat}&lon=${lon}`}
-              className={`gap-4 ${cn(buttonVariants({ size: "default" }))}`}
-            >
-              Start
-            </Link>
-          ) : (
-            <Link
-              href={`/main?lat=${DEFAULT_LOCATION.coord.lat}&lon=${DEFAULT_LOCATION.coord.lon}`}
-              className={`gap-4 ${cn(buttonVariants({ size: "default" }))}`}
-            >
-              Start Default Location
-            </Link>
-          )}
+          <Link
+            href={`/main?lat=${lat}&lon=${lon}`}
+            className={`gap-4 ${cn(buttonVariants({ size: "default" }))}`}
+          >
+            Start
+          </Link>
+
           <Link
             href={siteConfig.links.github}
             target="_blank"

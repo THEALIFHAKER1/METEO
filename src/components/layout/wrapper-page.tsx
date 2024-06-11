@@ -44,8 +44,7 @@ export default function WrapperPage({
       transition={{ ease: "easeInOut", duration: 0.75 }}
       className="h-full p-2"
     >
-      <Navbar />
-      <div className="h-[92%]">{children}</div>
+      {children}
     </motion.div>
   )
 }

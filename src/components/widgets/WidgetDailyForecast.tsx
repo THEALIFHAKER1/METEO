@@ -36,7 +36,7 @@ export default function WidgetDailyForecast({
         ref={ref}
         {...events}
         tabIndex={0}
-        className="mb-3 cursor-grab touch-auto touch-pan-y select-none overflow-auto scroll-smooth ring-offset-background transition-colors hover:overflow-x-auto focus:scroll-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        className=" cursor-grab touch-auto touch-pan-y select-none overflow-auto scroll-smooth ring-offset-background transition-colors hover:overflow-x-auto focus:scroll-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >
         <CardHeader>
           <CardTitle className="flex items-center gap-4 text-sm">
