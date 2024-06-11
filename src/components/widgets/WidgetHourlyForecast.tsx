@@ -37,11 +37,11 @@ export default function WidgetHourlyForecast({ data }: HourlyForecastProps) {
             Hourly Forecast
           </CardTitle>
         </CardHeader>
-        {data.slice(0, 12).map((item: ForecastData, i) => (
+        {data.slice(0, 12).map((item: ForecastData, idx) => (
           <>
-            <div key={item.dt} className="flex h-full flex-col justify-between">
+            <div key={idx} className="flex h-full flex-col justify-between">
               <div className="flex justify-center text-sm text-neutral-600 dark:text-neutral-400">
-                {i === 0 ? "Now" : extractHoursFromDate(item.dt)}
+                {idx === 0 ? "Now" : extractHoursFromDate(item.dt)}
               </div>
               <div className="flex h-full items-center justify-center">
                 {item.weather[0] && (

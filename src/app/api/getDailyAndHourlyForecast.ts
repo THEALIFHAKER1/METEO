@@ -17,7 +17,6 @@ export default async function getDailyAndHourlyForecast({
       throw new Error("Latitude and Longitude are required")
     }
     const apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,current,alerts&units=metric&appid=${KEY}`
-    console.log(apiUrl)
     const response = await fetch(apiUrl, {
       cache: "no-cache",
     })
