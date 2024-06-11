@@ -1,6 +1,6 @@
 import { type AirQualityData, type CurrentWeatherData } from "@/types"
 
-import AirPollution from "./AirPollution"
+import AirPollution from "./WidgetAirPollution"
 import WidgetCompass from "./WidgetCompass"
 import WidgetFeelsLike from "./WidgetFeelsLike"
 import WidgetHumidity from "./WidgetHumidity"
