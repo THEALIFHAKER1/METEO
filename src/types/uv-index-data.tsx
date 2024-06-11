@@ -1,4 +1,4 @@
-export type UvIndexData = {
+export type UVIndexData = {
   latitude: number
   longitude: number
   generationtime_ms: number
@@ -6,12 +6,16 @@ export type UvIndexData = {
   timezone: string
   timezone_abbreviation: string
   elevation: number
-  daily_units: {
-    time: string
-    uv_index_max: string
-  }
-  daily: {
-    time: string[]
-    uv_index_max: number[]
-  }
+  daily_units: DailyUnits
+  daily: DailyData
+}
+
+type DailyUnits = {
+  time: string
+  uv_index_max: string
+}
+
+type DailyData = {
+  time: string[]
+  uv_index_max: number[]
 }

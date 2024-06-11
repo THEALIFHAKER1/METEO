@@ -1,12 +1,20 @@
 import { type Metadata } from "next"
 import { DEFAULT_LOCATION, siteConfig } from "@/configs/site"
-import { type CurrentWeatherData, type DailyForecastData } from "@/types"
+import {
+  type AirPollutionData,
+  type CurrentWeatherData,
+  type DailyForecastData,
+  type UVIndexData,
+} from "@/types"
 
 import Navbar from "@/components/layout/navbar"
+import WeatherWidgets from "@/components/widgets/WeatherWidgets"
 import WidgetCurrentWeather from "@/components/widgets/WidgetCurrentWeather"
 import WidgetDailyForecast from "@/components/widgets/WidgetDailyForecast"
+import GetAirPollution from "@/app/api/GetAirPollution"
 import GetCurrentWeather from "@/app/api/GetCurrentWeather"
 import getDailyForecast from "@/app/api/getDailyForecast"
+import getUV from "@/app/api/getUV"
 
 type searchParams = Record<string, string>
 
@@ -82,10 +90,15 @@ export default async function MainPage({
     lon,
   })) as DailyForecastData
 
-  const [CurrentWeatherData, DailyForecastData] = await Promise.all([
-    CurrentWeather,
-    DailyForecast,
-  ])
+  const AirPollution: AirPollutionData = (await GetAirPollution({
+    lat,
+    lon,
+  })) as AirPollutionData
+
+  const UVIndex: UVIndexData = (await getUV({ lat, lon })) as UVIndexData
+
+  const [CurrentWeatherData, DailyForecastData, AirPollutionData, UVIndexData] =
+    await Promise.all([CurrentWeather, DailyForecast, AirPollution, UVIndex])
 
   return (
     <>
@@ -95,7 +108,13 @@ export default async function MainPage({
           <WidgetCurrentWeather data={CurrentWeatherData} />
           <WidgetDailyForecast data={DailyForecastData} />
         </div>
-        <section className="grid h-full grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4"></section>
+        <section className="grid h-full grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
+          <WeatherWidgets
+            data={CurrentWeather}
+            airQuality={AirPollutionData.list[0]!}
+            uvIndexForToday={UVIndexData.daily.uv_index_max[0]!}
+          />
+        </section>
       </div>
     </>
   )
