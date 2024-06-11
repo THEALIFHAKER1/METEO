@@ -4,7 +4,7 @@ import "mapbox-gl/dist/mapbox-gl.css"
 
 import { useEffect, useMemo, useState } from "react"
 import { useSearchParams } from "next/navigation"
-import { DEFAULT_LOCATION } from "@/configs/site"
+import { type Location } from "@/types"
 import { useTheme } from "next-themes"
 import ReactMapGL, { Layer, Source, type LayerProps } from "react-map-gl"
 
@@ -18,7 +18,16 @@ import {
   SelectValue,
 } from "../ui/select"
 
-const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
+export const DEFAULT_LOCATION: Location = {
+  city: "Kuala Lumpur, MY",
+  coord: {
+    lat: "3.1499",
+    lon: "101.6945",
+  },
+}
+
+const MAPBOX_TOKEN =
+  "pk.eyJ1IjoidGhlYWxpZmhha2VyMSIsImEiOiJjbHM5bGpiOW0wOHJzMmpuNnk0eXdta3YxIn0.OcONgd1zNYwsCGqHjbU0zg"
 const OPENWEATHERMAP_TOKEN = process.env.NEXT_PUBLIC_OPEN_WEATHER_API_KEY
 
 export default function Map() {
@@ -63,7 +72,7 @@ export default function Map() {
   const [viewport, setViewport] = useState({
     latitude: lat ? Number(lat) : Number(defaultLat),
     longitude: lon ? Number(lon) : Number(defaultLon),
-    zoom: 12,
+    zoom: 9,
     pitch: 60,
     bearing: -60,
   })
@@ -79,7 +88,7 @@ export default function Map() {
   }, [lat, lon, defaultLat, defaultLon])
 
   return (
-    <Card className="relative order-11 col-span-2 h-[25rem] overflow-hidden overscroll-contain lg:col-span-3 xl:col-span-4">
+    <Card className="relative order-11 col-span-2 h-[27rem] overflow-hidden overscroll-contain  p-0 md:p-0 lg:col-span-3 xl:col-span-4">
       <div className="absolute right-0 z-10 m-2">
         <Select value={MapCode} onValueChange={setMapCode}>
           <SelectTrigger aria-label="Map layer" className="w-fit">
