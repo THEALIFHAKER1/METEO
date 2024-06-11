@@ -7,6 +7,7 @@ import { useTheme } from "next-themes"
 import { useSessionStorage } from "usehooks-ts"
 
 import Loader from "./loader"
+import Navbar from "./navbar"
 
 export default function WrapperPage({
   children,
@@ -41,9 +42,10 @@ export default function WrapperPage({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ ease: "easeInOut", duration: 0.75 }}
-      className="h-full p-5"
+      className="h-full p-2"
     >
-      {children}
+      <Navbar />
+      <div className="h-[92%]">{children}</div>
     </motion.div>
   )
 }

@@ -3,17 +3,18 @@ import { DEFAULT_LOCATION, siteConfig } from "@/configs/site"
 import {
   type AirPollutionData,
   type CurrentWeatherData,
-  type DailyForecastData,
+  type DailyAndHourlyForecastData,
   type UVIndexData,
 } from "@/types"
 
-import Navbar from "@/components/layout/navbar"
+import Map from "@/components/widgets/Map"
 import WeatherWidgets from "@/components/widgets/WeatherWidgets"
 import WidgetCurrentWeather from "@/components/widgets/WidgetCurrentWeather"
 import WidgetDailyForecast from "@/components/widgets/WidgetDailyForecast"
+import WidgetHourlyForecast from "@/components/widgets/WidgetHourlyForecast"
 import GetAirPollution from "@/app/api/GetAirPollution"
 import GetCurrentWeather from "@/app/api/GetCurrentWeather"
-import getDailyForecast from "@/app/api/getDailyForecast"
+import getDailyAndHourlyForecast from "@/app/api/getDailyAndHourlyForecast"
 import getUV from "@/app/api/getUV"
 
 type searchParams = Record<string, string>
@@ -85,10 +86,11 @@ export default async function MainPage({
     lon,
   })) as CurrentWeatherData
 
-  const DailyForecast: DailyForecastData = (await getDailyForecast({
-    lat,
-    lon,
-  })) as DailyForecastData
+  const DailyAndHourlyForecast: DailyAndHourlyForecastData =
+    (await getDailyAndHourlyForecast({
+      lat,
+      lon,
+    })) as DailyAndHourlyForecastData
 
   const AirPollution: AirPollutionData = (await GetAirPollution({
     lat,
@@ -97,16 +99,32 @@ export default async function MainPage({
 
   const UVIndex: UVIndexData = (await getUV({ lat, lon })) as UVIndexData
 
-  const [CurrentWeatherData, DailyForecastData, AirPollutionData, UVIndexData] =
-    await Promise.all([CurrentWeather, DailyForecast, AirPollution, UVIndex])
+  const DailyForecast = DailyAndHourlyForecast.daily
+  const HourlyForecast = DailyAndHourlyForecast.hourly
+
+  const [
+    CurrentWeatherData,
+    DailyForecastData,
+    HourlyForecastData,
+    AirPollutionData,
+    UVIndexData,
+  ] = await Promise.all([
+    CurrentWeather,
+    DailyForecast,
+    HourlyForecast,
+    AirPollution,
+    UVIndex,
+  ])
 
   return (
     <>
-      <Navbar />
-      <div className="flex h-[95%] flex-col gap-4 pb-5 md:flex-row">
+      <div className="flex h-full flex-col gap-4 pb-5 md:flex-row">
         <div className="flex w-full min-w-[18rem] flex-col gap-4 md:w-1/2">
           <WidgetCurrentWeather data={CurrentWeatherData} />
-          <WidgetDailyForecast data={DailyForecastData} />
+          <WidgetDailyForecast
+            data={DailyForecastData}
+            timezone={CurrentWeatherData.timezone}
+          />
         </div>
         <section className="grid h-full grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
           <WeatherWidgets
@@ -114,6 +132,8 @@ export default async function MainPage({
             airQuality={AirPollutionData.list[0]!}
             uvIndexForToday={UVIndexData.daily.uv_index_max[0]!}
           />
+          <WidgetHourlyForecast data={HourlyForecastData} />
+          <Map />
         </section>
       </div>
     </>

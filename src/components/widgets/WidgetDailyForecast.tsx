@@ -1,4 +1,8 @@
-import { type DailyForecastData, type ForecastData } from "@/types"
+"use client"
+
+import { useRef } from "react"
+import { type DailyAndHourlyForecastData, type ForecastData } from "@/types"
+import { useDraggable } from "react-use-draggable-scroll"
 
 import { convertToDate } from "@/lib/dateUtils"
 
@@ -8,19 +12,32 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card"
 import { Separator } from "../ui/separator"
 
 interface WidgetDailyForecastProps {
-  data: DailyForecastData
+  data: DailyAndHourlyForecastData["daily"]
+  timezone: number
 }
 
 export default function WidgetDailyForecast({
   data,
+  timezone,
 }: WidgetDailyForecastProps) {
-  const temperatures = data.daily.map((item: ForecastData) => item.temp)
+  const temperatures = data.map((item: ForecastData) => item.temp)
   const minTemperature = Math.min(...temperatures.map((temp) => temp.min))
   const maxTemperature = Math.max(...temperatures.map((temp) => temp.max))
 
+  const ref =
+    useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>
+  const { events } = useDraggable(ref, {
+    safeDisplacement: 2,
+  })
+
   return (
     <>
-      <Card className="overflow-auto">
+      <Card
+        ref={ref}
+        {...events}
+        tabIndex={0}
+        className="cursor-grab touch-auto touch-pan-y select-none overflow-auto scroll-smooth ring-offset-background transition-colors hover:overflow-x-auto focus:scroll-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      >
         <CardHeader>
           <CardTitle className="flex items-center gap-4 text-sm">
             <i>
@@ -110,17 +127,18 @@ export default function WidgetDailyForecast({
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 overflow-auto text-base font-normal md:mb-1">
-          {data.daily.map((item: ForecastData, i) => (
+          {data.map((item: ForecastData, i) => (
             <div key={item.dt}>
               <div className="flex w-full flex-row items-center justify-between gap-2 last:mb-0">
                 <p className="min-w-[3rem] font-medium">
                   {i === 0
                     ? "Today"
-                    : convertToDate(data.timezone_offset, item.dt, "short")}
+                    : convertToDate(timezone, item.dt, "short")}
                 </p>
                 {item.weather[0] && (
                   <IconComponent
                     weatherCode={item.weather[0]?.id}
+                    x={item.weather[0]?.icon.slice(-1)}
                     className="h-8 w-8"
                   />
                 )}
@@ -140,7 +158,7 @@ export default function WidgetDailyForecast({
                   </div>
                 </div>
               </div>
-              {i !== data.daily.length - 1 && <Separator className="mt-3" />}
+              {i !== data.length - 1 && <Separator className="mt-3" />}
             </div>
           ))}
         </CardContent>

@@ -6,7 +6,7 @@ import { ThemeSwitcher } from "../custom/theme-switcher"
 
 export default function Navbar() {
   return (
-    <nav className="flex h-[5%] items-center justify-between">
+    <nav className="flex h-[8%] items-center justify-between">
       <div className="flex items-center">
         <p className="text-2xl">🌦️</p>
         <p className="text-2xl font-bold">{siteConfig.name}</p>
