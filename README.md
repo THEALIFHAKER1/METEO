@@ -1,6 +1,8 @@
-# NEXT INITIATE
+![Untitled-1](https://raw.githubusercontent.com/THEALIFHAKER1/METEO/master/public/preview.png)
 
-NEXT.js 14+ starter template with app router, shadcn/ui, typesafe env, icons and configs setup.
+# METEO
+
+Real-time weather app build with Next.js 14, Typescript and Shadcn UI. That gives you all the weather information you need
 
 ## Usage
 
@@ -30,16 +32,10 @@ cp .env.example .env.local
 
 ## Features
 
-This template uses [shadcn](https://github.com/shadcn)'s Next.js app structure from [shadcn/ui](https://ui.shadcn.com/).
-
-- Next.js 14+ `/app` router
-- TypeScript
-- Tailwind CSS
-- shadcn/ui (Radix UI + Tailwind)
-- Prettier (w/ auto sort imports and tailwind classes)
-- SEO optimized
-- Typesafe env, icons, and config
-- Ready to use - jump right into development
+Key Features:
+- Current Weather Conditions
+- Forecast weather and temperature for the next 7 day
+- Interactive Map with various weather-related data
 
 ## Scripts
 
