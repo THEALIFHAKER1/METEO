@@ -1,8 +1,9 @@
 "use client"
 
+import Image from "next/image"
 import { motion as m } from "framer-motion"
 
-import { Icons } from "../icons/icons"
+import { Images } from "../icons/icons"
 
 type LoaderProps = {
   loadingText?: string
@@ -23,7 +24,7 @@ export default function Loader({ loadingText }: LoaderProps) {
       className="relative flex h-full w-full flex-col items-center justify-center font-sans focus:focus-visible:focus:outline-none"
     >
       <span className="z-[1] animate-pulse font-sans text-8xl sm:text-[30vh]">
-        <Icons.logo className="h-32 w-32" />
+        <Image src={Images.logo} alt="Logo" width={128} height={128} />
       </span>
       {loadingText && (
         <span className="z-[1] font-mono text-sm uppercase">
