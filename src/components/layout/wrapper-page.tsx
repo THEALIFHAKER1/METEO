@@ -7,7 +7,6 @@ import { useTheme } from "next-themes"
 import { useSessionStorage } from "usehooks-ts"
 
 import Loader from "./loader"
-import Navbar from "./navbar"
 
 export default function WrapperPage({
   children,

@@ -6,7 +6,6 @@ import "@/styles/globals.css"
 import { siteConfig } from "@/configs/site"
 import { ThemeProvider } from "next-themes"
 
-import ScreenSizeDetector from "@/components/custom/ScreenSizeDetector"
 import WrapperPage from "@/components/layout/wrapper-page"
 
 const inter = Inter({ subsets: ["latin"] })

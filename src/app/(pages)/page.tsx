@@ -19,9 +19,6 @@ export default function HomePage({
   const lat = searchParams.lat
   const lon = searchParams.lon
 
-  console.log("Latitude:", lat) // Debugging: check the values
-  console.log("Longitude:", lon) // Debugging: check the values
-
   return (
     <>
       <div className="container flex h-full max-w-[64rem] flex-col items-center justify-center gap-4 text-center">
