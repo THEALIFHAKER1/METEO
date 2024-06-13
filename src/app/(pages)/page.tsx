@@ -30,7 +30,7 @@ export default function HomePage({
           targetText={siteConfig.name}
           className="text-4xl font-semibold sm:text-5xl md:text-6xl lg:text-7xl"
         />
-        <div className="flex gap-2">
+        <div className="flex flex-col gap-2 md:flex-row  ">
           <GetLocation />
         </div>
         <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
