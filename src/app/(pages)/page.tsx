@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link"
 import { siteConfig } from "@/configs/site"
 
@@ -11,15 +9,18 @@ import { Icons } from "@/components/icons/icons"
 
 import GetLocation from "../api/getLocation"
 
-type searchParams = Record<string, string>
+type SearchParams = Record<string, string>
 
 export default function HomePage({
   searchParams,
 }: {
-  searchParams: searchParams
+  searchParams: SearchParams
 }) {
   const lat = searchParams.lat
   const lon = searchParams.lon
+
+  console.log("Latitude:", lat) // Debugging: check the values
+  console.log("Longitude:", lon) // Debugging: check the values
 
   return (
     <>
